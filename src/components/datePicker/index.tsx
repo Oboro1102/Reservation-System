@@ -78,30 +78,30 @@ export function DatePicker() {
     switch (type) {
       case 'month':
         return generateCalendar(pickerDate, 42).map((item, index) => (
-          <div className='p-2 h-28 rounded-lg bg-white' key={index}>
+          <div className='p-2 h-28 overflow-hidden rounded-lg bg-white text-xs sm:text-base' key={index}>
             <span className={`p-1 font-bold ${renderDateStyle(item)}`}>{item.date}</span>
             {renderAppointmentList(item).length > 0 && (
-              <ul>
-                {renderAppointmentList(item).map((item, index) => (<li className='mt-2 text-sm' key={index}>{item.note}</li>))}
+              <ul className='py-2 h-full max-h-fit overflow-auto text-xs sm:text-sm'>
+                {renderAppointmentList(item).map((item, index) => (<li key={index}>{item.note}</li>))}
               </ul>
             )}
           </div>))
       case 'week':
         return generateCalendar(pickerDate, 7).map((item, index) => (
-          <div className='p-2 h-full rounded-lg bg-white' key={index}>
+          <div className='p-2 h-full overflow-hidden rounded-lg bg-white text-xs sm:text-base' key={index}>
             <span className={`p-1 font-bold ${renderDateStyle(item)}`}>{item.date}</span>
             {renderAppointmentList(item).length > 0 && (
-              <ul>
-                {renderAppointmentList(item).map((item, index) => (<li className='mt-2 text-sm' key={index}>{item.note}</li>))}
+              <ul className='py-2 h-full max-h-fit overflow-auto text-xs sm:text-sm'>
+                {renderAppointmentList(item).map((item, index) => (<li key={index}>{item.note}</li>))}
               </ul>
             )}
           </div>))
       case 'date':
-        return <div className='p-2 w-full h-full rounded-lg bg-white'>
+        return <div className='p-2 w-full h-full overflow-hidden rounded-lg bg-white text-xs sm:text-base'>
           <span className={`p-1 font-bold ${renderDateStyle(pickerDate)}`}>{pickerDate.date}</span>
           {renderAppointmentList(pickerDate).length > 0 && (
-            <ul>
-              {renderAppointmentList(pickerDate).map((item, index) => (<li className='mt-2 text-sm' key={index}>{item.note}</li>))}
+            <ul className='py-2 h-full max-h-fit overflow-auto text-xs sm:text-sm'>
+              {renderAppointmentList(pickerDate).map((item, index) => (<li key={index}>{item.note}</li>))}
             </ul>
           )}
         </div>

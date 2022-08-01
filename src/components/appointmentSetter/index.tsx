@@ -39,9 +39,9 @@ export function AppointmentSetter() {
 
   return (
     <div>
-      <button className='fixed bottom-20 right-10 flex items-center justify-center w-10 h-10 rounded-full bg-green-600 text-white' aria-label="開啟建立待辦事項視窗" onClick={() => setShowAbout(true)}><i className='gg-math-plus'></i></button>
+      <button className='fixed bottom-10 sm:bottom-20 right-5 sm:right-10 flex items-center justify-center w-10 h-10 rounded-full bg-green-600 text-white' aria-label="開啟建立待辦事項視窗" onClick={() => setShowAbout(true)}><i className='gg-math-plus'></i></button>
       {showAppointmentSetter && (
-        <div className='fixed inset-1/4 p-4 max-w-lg mx-auto min-h-fit rounded-xl bg-blue-600'>
+        <div className='fixed bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 p-4 w-full max-w-xs sm:max-w-md min-h-fit rounded-xl bg-blue-600'>
           <input className='w-full p-2 rounded' type="date" name='date' value={`${newAppointmentData.date.year}-${newAppointmentData.date.month > 9 ? newAppointmentData.date.month : `0${newAppointmentData.date.month}`}-${newAppointmentData.date.date}`} onChange={(event) => setNewAppointmentData({ date: reFormatDate(event.target.value), note: newAppointmentData.note })} />
           <input className='w-full mt-4 p-2 rounded' type="text" name='note' value={newAppointmentData.note} onChange={(event) => setNewAppointmentData({ date: newAppointmentData.date, note: event.target.value })} />
           <div className='mt-4 flex justify-around'>
