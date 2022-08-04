@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 import { useAppDispatch } from '../../app/hooks';
 import { addAppointment } from './appointmentSetterSlice';
 
+interface submitData {
+  date: {
+    year: number,
+    month: number,
+    date: number,
+    day: number
+  },
+  note: string
+}
+
 export function AppointmentSetter() {
   const dispatch = useAppDispatch();
   // state
@@ -24,15 +34,7 @@ export function AppointmentSetter() {
       day: new Date(value).getDay(),
     }
   }
-  const submitData = (data: {
-    date: {
-      year: number,
-      month: number,
-      date: number,
-      day: number
-    },
-    note: string
-  }) => {
+  const submitData = (data: submitData) => {
     dispatch(addAppointment(data))
     setShowAbout(false)
   }

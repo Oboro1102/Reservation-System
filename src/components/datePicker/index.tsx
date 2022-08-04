@@ -2,6 +2,8 @@ import { useAppSelector } from '../../app/hooks';
 import { defaultDate, defaultPickerDate, defaultView } from '../settingBar/settingBarSlice';
 import { defaultAppointment } from '../appointmentSetter/appointmentSetterSlice';
 
+interface date { year: number, month: number, date: number, day: number }
+
 export function DatePicker() {
   // state
   const today = useAppSelector(defaultDate);
@@ -10,7 +12,7 @@ export function DatePicker() {
   const appointment = useAppSelector(defaultAppointment);
 
   // methods
-  const calculateFirstDate = (calculateDate: { year: number, month: number, date: number, day: number }, type: string): { year: number, month: number, date: number, day: number } => {
+  const calculateFirstDate = (calculateDate: date, type: string): date => {
     const { year, month, date } = calculateDate
     let result
     if (type === 'month') {
@@ -29,7 +31,7 @@ export function DatePicker() {
       day: result.getDay(),
     };
   }
-  const generateCalendar = (calculateDate: { year: number, month: number, date: number, day: number, }, totalDays: number): { year: number; month: number; date: number; day: number; }[] => {
+  const generateCalendar = (calculateDate: date, totalDays: number): date[] => {
     const result = [];
     const { year, month, date } = calculateFirstDate(calculateDate, totalDays > 7 ? 'month' : 'week')
     let calendarDate;
@@ -51,7 +53,7 @@ export function DatePicker() {
       saturday: 'text-green-600',
       today: 'bg-blue-500 text-white rounded-full'
     }
-    const renderDateStyle = (value: { year: number, month: number, date: number, day: number }): string => {
+    const renderDateStyle = (value: date): string => {
       const conditionMap: { otherDay: boolean, sunday: boolean, saturday: boolean, today: boolean } = {
         otherDay: value.month !== today.month || value.year !== today.year,
         sunday: value.day === 0 && value.month === today.month && value.year === today.year && value.date !== today.date,
@@ -70,7 +72,7 @@ export function DatePicker() {
 
       return result.join(' ')
     }
-    const renderAppointmentList = (value: { year: number, month: number, date: number, day: number }) => {
+    const renderAppointmentList = (value: date) => {
       const list = appointment.filter(item => { return Object.values(item.date).join() === Object.values(value).join() })
       return list
     }
